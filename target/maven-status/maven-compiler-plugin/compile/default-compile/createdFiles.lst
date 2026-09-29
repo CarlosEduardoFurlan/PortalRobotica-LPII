@@ -1,0 +1,14 @@
+br\edu\ifms\robotica\model\Atividade.class
+br\edu\ifms\robotica\model\PeriodoLetivo.class
+br\edu\ifms\robotica\dao\AtividadePeriodoDAO.class
+br\edu\ifms\robotica\model\Coordenador.class
+br\edu\ifms\robotica\dao\AtividadeDAO.class
+br\edu\ifms\robotica\dao\PeriodoLetivoDAO.class
+br\edu\ifms\robotica\model\Estudante.class
+br\edu\ifms\robotica\util\Conexao.class
+br\edu\ifms\robotica\model\Conquista.class
+br\edu\ifms\robotica\dao\CoordenadorDAO.class
+br\edu\ifms\robotica\dao\EstudanteDAO.class
+br\edu\ifms\robotica\dao\ParticipacaoDAO.class
+br\edu\ifms\robotica\model\Participacao.class
+br\edu\ifms\robotica\servlet\EstudanteServlet.class

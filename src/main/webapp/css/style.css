@@ -1,0 +1,462 @@
+:root {
+	--ifms-verde: #32A041;
+	--ifms-vermelho: #C8191E;
+	--ifms-preto: #000000;
+	--cinza-900: #212529;
+	--cinza-700: #495057;
+	--cinza-500: #6c757d;
+	--cinza-200: #e9ecef;
+	--cinza-100: #f8f9fa;
+	--branco: #ffffff;
+}
+
+body {
+	margin: 0;
+	color: var(--cinza-900);
+	background-color: var(--branco);
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ========================================
+   CABEÇALHO
+   ======================================== */
+.barra-superior {
+	background-color: var(--cinza-100);
+	border-bottom: 1px solid var(--cinza-200);
+	font-size: 0.875rem;
+}
+
+.barra-superior .container {
+	min-height: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+}
+
+.idiomas {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+.idiomas a {
+	color: var(--cinza-700);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.idiomas a:hover {
+	color: var(--ifms-verde);
+}
+
+/* ========================================
+   IDENTIDADE
+   ======================================== */
+.cabecalho-principal {
+	padding-top: 24px;
+	padding-bottom: 24px;
+}
+
+.identidade-site {
+	display: flex;
+	align-items: center;
+	gap: 24px;
+}
+
+.marca-ifms {
+	flex-shrink: 0;
+}
+
+.logo-ifms {
+	display: block;
+	width: auto;
+	height: 80px;
+	max-width: 100%;
+}
+
+.titulo-site {
+	padding-left: 24px;
+	border-left: 1px solid var(--cinza-200);
+	display: flex;
+	flex-direction: column;
+}
+
+.titulo-site span {
+	color: var(--cinza-500);
+	font-size: 0.875rem;
+}
+
+.titulo-site strong {
+	color: var(--cinza-900);
+	font-size: 1.35rem;
+}
+
+/* ========================================
+   NAVEGAÇÃO
+   ======================================== */
+.navegacao-principal {
+	background-color: var(--ifms-verde);
+}
+
+.navegacao-principal .nav-link {
+	color: var(--branco);
+	font-weight: 600;
+	padding-left: 18px !important;
+	padding-right: 18px !important;
+}
+
+.navegacao-principal .nav-link:hover {
+	background-color: rgba(0, 0, 0, 0.12);
+	color: var(--branco);
+}
+
+.link-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    color: var(--ifms-verde);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.link-voltar:hover {
+    color: #217a30;
+    text-decoration: none;
+}
+
+/* ========================================
+   CONTEÚDO
+   ======================================== */
+main {
+	min-height: 500px;
+}
+
+.titulo-pagina {
+	margin-bottom: 30px;
+}
+
+.titulo-pagina h1 {
+	font-weight: 700;
+}
+
+.titulo-pagina::after {
+	content: "";
+	display: block;
+	width: 55px;
+	height: 4px;
+	margin-top: 12px;
+	background-color: var(--ifms-verde);
+}
+
+/* ========================================
+   BOTÕES
+   ======================================== */
+.btn-ifms {
+	color: var(--branco);
+	background-color: var(--ifms-verde);
+	border-color: var(--ifms-verde);
+}
+
+.btn-ifms:hover,
+.btn-ifms:focus {
+    background-color: #217a30;
+    border-color: #217a30;
+    color: #ffffff;
+}
+
+/* ========================================
+   CARDS
+   ======================================== */
+.card {
+	border-color: var(--cinza-200);
+}
+
+.card:hover {
+	border-color: var(--ifms-verde);
+}
+
+/* ========================================
+   RODAPÉ
+   ======================================== */
+.rodape-site {
+	margin-top: 60px;
+	padding-top: 45px;
+	padding-bottom: 25px;
+	color: var(--branco);
+	background-color: var(--cinza-900);
+}
+
+.rodape-site p {
+	margin-bottom: 5px;
+	color: #ced4da;
+}
+
+.rodape-site hr {
+	border-color: #495057;
+}
+
+.rodape-final {
+	font-size: 0.875rem;
+}
+
+/* ========================================
+   RESPONSIVIDADE
+   ======================================== */
+@media ( max-width : 768px) {
+	.barra-superior .container {
+		padding-top: 10px;
+		padding-bottom: 10px;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 5px;
+	}
+	.identidade-site {
+		align-items: flex-start;
+		flex-direction: column;
+	}
+	.logo-ifms {
+		height: 65px;
+	}
+	.titulo-site {
+		padding-left: 0;
+		border-left: 0;
+	}
+}
+
+/* ========================================
+   HOME
+   ======================================== */
+
+.hero-card {
+    border-top: 4px solid var(--ifms-verde);
+    background-color: #ffffff;
+}
+
+.hero-card-marca {
+    display: flex;
+    align-items: center;
+}
+
+.hero-card-sigla {
+    display: inline-block;
+    padding: 8px 14px;
+
+    background-color: var(--ifms-verde);
+    color: #ffffff;
+
+    font-weight: 700;
+    letter-spacing: 0.04em;
+
+    border-radius: 4px;
+}
+
+.hero-card-detalhe {
+    display: flex;
+    flex-direction: column;
+
+    padding-top: 18px;
+
+    border-top: 1px solid var(--cinza-200);
+}
+
+.hero-card-detalhe strong {
+    color: var(--cinza-900);
+}
+
+.hero-card-detalhe span {
+    margin-top: 4px;
+
+    color: var(--cinza-600);
+    font-size: 0.95rem;
+}
+
+.hero-robotica {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-robotica::before {
+    content: "⚙";
+    position: absolute;
+    top: 40px;
+    right: 120px;
+    font-size: 120px;
+    color: rgba(46, 160, 67, 0.08);
+    line-height: 1;
+}
+
+.hero-robotica::after {
+    content: "⚙";
+    position: absolute;
+    bottom: 30px;
+    right: 40px;
+    font-size: 70px;
+    color: rgba(46, 160, 67, 0.06);
+    line-height: 1;
+}
+
+.hero-conteudo {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-card-info {
+    border: 1px solid #e3e6e8;
+    background: #ffffff;
+    position: relative;
+    z-index: 2;
+}
+
+.card-acesso-home {
+    border: 1px solid var(--cinza-200);
+
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+.card-acesso-home:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08) !important;
+}
+
+.card-acesso-home .card-body {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-acesso-home .btn {
+    margin-top: auto;
+    align-self: flex-start;
+}
+
+/* ========================================
+   ESTUDANTES
+   ======================================== */
+
+.card-estudante {
+    overflow: hidden;
+}
+
+.foto-estudante {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    background-color: var(--cinza-100);
+}
+
+.foto-estudante-placeholder {
+    width: 100%;
+    height: 240px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: var(--cinza-100);
+    border-bottom: 1px solid var(--cinza-200);
+
+    color: var(--ifms-verde);
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.card-estudante .card-title {
+    font-weight: 700;
+}
+
+@media (max-width: 576px) {
+
+    .foto-estudante,
+    .foto-estudante-placeholder {
+        height: 220px;
+    }
+
+}
+
+/* ========================================
+   ATIVIDADES
+   ======================================== */
+
+.card-atividade {
+     border: 1px solid var(--cinza-200);
+}
+
+.card-atividade .card-title {
+    font-weight: 700;
+}
+
+.badge-ifms {
+    padding: 7px 10px;
+
+    color: var(--ifms-verde);
+    background-color: #eaf5ec;
+
+    border: 1px solid #cce7d0;
+
+    font-weight: 600;
+}
+
+.dados-atividade {
+    padding-top: 16px;
+
+    border-top: 1px solid var(--cinza-200);
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+
+    font-size: 0.9rem;
+}
+
+.dados-atividade div {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.dados-atividade span {
+    color: var(--cinza-700);
+    text-align: right;
+}
+
+
+/* ========================================
+   ÁREA ADMINISTRATIVA
+   ======================================== */
+
+.cabecalho-admin {
+    border-bottom: 1px solid var(--cinza-200);
+}
+
+.navegacao-admin {
+    background-color: var(--cinza-900);
+}
+
+.navegacao-admin .nav-link {
+    color: var(--branco);
+    font-weight: 600;
+
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+}
+
+.navegacao-admin .nav-link:hover {
+    color: var(--branco);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.area-admin {
+    padding-top: 48px;
+    padding-bottom: 60px;
+}
+
+.tabela-admin th {
+    white-space: nowrap;
+}
+
+.tabela-admin td {
+    vertical-align: middle;
+}

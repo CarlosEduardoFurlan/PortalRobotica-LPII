@@ -1,0 +1,14 @@
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\dao\AtividadeDAO.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\dao\AtividadePeriodoDAO.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\dao\CoordenadorDAO.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\dao\EstudanteDAO.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\dao\ParticipacaoDAO.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\dao\PeriodoLetivoDAO.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\model\Atividade.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\model\Conquista.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\model\Coordenador.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\model\Estudante.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\model\Participacao.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\model\PeriodoLetivo.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\servlet\EstudanteServlet.java
+C:\dev\workspace-robotica\portal-robotica\src\main\java\br\edu\ifms\robotica\util\Conexao.java
