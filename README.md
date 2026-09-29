@@ -69,7 +69,7 @@ Funcionalidades disponíveis:
 - Exclusão de períodos letivos
 - Associação de estudantes às atividades
 - Exclusão de participações
-- Associação de atividades aos períodos letivos
+- Cadastro de atividades com associação a um ou dois períodos letivos
 - Exclusão das associações entre atividade e período
 - Validações de integridade
 - Mensagens de sucesso
@@ -201,7 +201,7 @@ O script de criação das tabelas está localizado em:
 sql/portal_robotica.sql
 ```
 
-As principais tabelas são:
+As principais tabelas utilizadas nesta versão são:
 
 - `estudante`
 - `coordenador`
@@ -209,6 +209,8 @@ As principais tabelas são:
 - `periodo_letivo`
 - `participacao`
 - `atividade_periodo`
+
+O modelo do banco também possui a tabela `conquista`, preparada para uma etapa futura do projeto.
 
 ## Configuração do banco
 
@@ -564,7 +566,6 @@ As principais rotas administrativas são:
 /admin/atividades
 /admin/periodos
 /admin/participacoes
-/admin/atividade-periodo
 ```
 
 ## Testes realizados
@@ -586,9 +587,9 @@ Durante o desenvolvimento foram testados os seguintes cenários:
 - associação de estudante a atividade;
 - bloqueio de participação duplicada;
 - exclusão de participação;
-- associação de atividade a período;
-- bloqueio de associação duplicada;
-- exclusão da associação atividade/período;
+- cadastro de atividade com associação a um período letivo;
+- cadastro de atividade com associação a dois períodos letivos;
+- prevenção da repetição do mesmo período no cadastro da atividade;
 - troca entre português, inglês, espanhol e francês;
 - exibição pública de estudantes;
 - exibição das atividades dos estudantes;

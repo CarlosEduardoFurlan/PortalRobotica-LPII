@@ -13,62 +13,104 @@ import br.edu.ifms.robotica.util.Conexao;
 
 public class AtividadeDAO {
 
-    public void inserir(Atividade atividade) throws SQLException {
+	public Long inserir(Atividade atividade) throws SQLException {
 
-        String sql = "INSERT INTO atividade " +
-                     "(titulo, tipo, descricao, data_inicio, data_fim, situacao, coordenador_id) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
+	    String sql = "INSERT INTO atividade "
+	            + "(titulo, tipo, descricao, data_inicio, data_fim, situacao, coordenador_id) "
+	            + "VALUES (?, ?, ?, ?, ?, ?, ?) "
+	            + "RETURNING id";
 
-        try (Connection conexao = Conexao.conectar();
-             PreparedStatement stmt = conexao.prepareStatement(sql)) {
+	    try (Connection conexao = Conexao.conectar();
+	         PreparedStatement stmt = conexao.prepareStatement(sql)) {
 
-            stmt.setString(1, atividade.getTitulo());
-            stmt.setString(2, atividade.getTipo());
-            stmt.setString(3, atividade.getDescricao());
-            stmt.setDate(4, atividade.getDataInicio());
-            stmt.setDate(5, atividade.getDataFim());
-            stmt.setString(6, atividade.getStatus());
-            stmt.setLong(7, atividade.getCoordenadorId());
+	        stmt.setString(1, atividade.getTitulo());
+	        stmt.setString(2, atividade.getTipo());
+	        stmt.setString(3, atividade.getDescricao());
+	        stmt.setDate(4, atividade.getDataInicio());
+	        stmt.setDate(5, atividade.getDataFim());
+	        stmt.setString(6, atividade.getStatus());
+	        stmt.setLong(7, atividade.getCoordenadorId());
 
-            stmt.executeUpdate();
-        }
-    }
+	        try (ResultSet resultado = stmt.executeQuery()) {
 
-    public List<Atividade> listar() throws SQLException {
+	            if (resultado.next()) {
+	                return resultado.getLong("id");
+	            }
+	        }
+	    }
 
-        List<Atividade> atividades = new ArrayList<>();
+	    throw new SQLException(
+	        "Não foi possível obter o ID da atividade cadastrada."
+	    );
+	}
 
-        String sql = "SELECT id, titulo, tipo, descricao, data_inicio, " +
-                     "data_fim, situacao, coordenador_id " +
-                     "FROM atividade " +
-                     "ORDER BY data_inicio DESC";
+	public List<Atividade> listar() throws SQLException {
 
-        try (Connection conexao = Conexao.conectar();
-             PreparedStatement stmt = conexao.prepareStatement(sql);
-             ResultSet resultado = stmt.executeQuery()) {
+	    List<Atividade> atividades = new ArrayList<>();
 
-            while (resultado.next()) {
+	    String sql = "SELECT id, titulo, tipo, descricao, data_inicio, "
+	               + "data_fim, situacao, coordenador_id "
+	               + "FROM atividade "
+	               + "ORDER BY data_inicio DESC";
 
-                Atividade atividade = new Atividade();
+	    try (Connection conexao = Conexao.conectar();
+	         PreparedStatement stmt = conexao.prepareStatement(sql);
+	         ResultSet resultado = stmt.executeQuery()) {
 
-                atividade.setId(resultado.getLong("id"));
-                atividade.setTitulo(resultado.getString("titulo"));
-                atividade.setTipo(resultado.getString("tipo"));
-                atividade.setDescricao(resultado.getString("descricao"));
-                atividade.setDataInicio(resultado.getDate("data_inicio"));
-                atividade.setDataFim(resultado.getDate("data_fim"));
-                atividade.setStatus(resultado.getString("situacao"));
-                atividade.setCoordenadorId(
-                    resultado.getLong("coordenador_id")
-                );
+	        while (resultado.next()) {
 
-                atividades.add(atividade);
-            }
-        }
+	            Atividade atividade = new Atividade();
 
-        return atividades;
-    }
+	            atividade.setId(
+	                resultado.getLong("id")
+	            );
 
+	            atividade.setTitulo(
+	                resultado.getString("titulo")
+	            );
+
+	            atividade.setTipo(
+	                resultado.getString("tipo")
+	            );
+
+	            atividade.setDescricao(
+	                resultado.getString("descricao")
+	            );
+
+	            atividade.setDataInicio(
+	                resultado.getDate("data_inicio")
+	            );
+
+	            atividade.setDataFim(
+	                resultado.getDate("data_fim")
+	            );
+
+	            atividade.setStatus(
+	                resultado.getString("situacao")
+	            );
+
+	            atividade.setCoordenadorId(
+	                resultado.getLong("coordenador_id")
+	            );
+
+	            atividades.add(atividade);
+	        }
+	    }
+
+	    
+	    for (Atividade atividade : atividades) {
+
+	        atividade.setPeriodos(
+	            listarPeriodosPorAtividade(
+	                atividade.getId()
+	            )
+	        );
+	    }
+
+	    return atividades;
+	}
+	
+	
     public void excluir(Long id) throws SQLException {
 
         String sql = "DELETE FROM atividade WHERE id = ?";

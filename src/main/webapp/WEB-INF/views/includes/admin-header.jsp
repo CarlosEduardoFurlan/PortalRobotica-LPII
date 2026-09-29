@@ -147,17 +147,6 @@
                         </a>
                     </li>
 
-
-                    <li class="nav-item">
-                        <a
-                            class="nav-link"
-                            href="${pageContext.request.contextPath}/admin/atividade-periodo">
-
-                            <fmt:message key="admin.header.atividadePeriodo" />
-
-                        </a>
-                    </li>
-
                 </ul>
 
 

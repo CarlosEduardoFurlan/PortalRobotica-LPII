@@ -11,20 +11,28 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifms.robotica.dao.AtividadeDAO;
-import br.edu.ifms.robotica.model.Atividade;
+import br.edu.ifms.robotica.dao.AtividadePeriodoDAO;
 import br.edu.ifms.robotica.dao.CoordenadorDAO;
+import br.edu.ifms.robotica.dao.PeriodoLetivoDAO;
+import br.edu.ifms.robotica.model.Atividade;
 import br.edu.ifms.robotica.model.Coordenador;
+import br.edu.ifms.robotica.model.PeriodoLetivo;
 
 @WebServlet("/admin/atividades")
 public class AtividadeServlet extends HttpServlet {
 
     private AtividadeDAO atividadeDAO;
     private CoordenadorDAO coordenadorDAO;
+    private PeriodoLetivoDAO periodoLetivoDAO;
+    private AtividadePeriodoDAO atividadePeriodoDAO;
 
     @Override
     public void init() {
+
         atividadeDAO = new AtividadeDAO();
         coordenadorDAO = new CoordenadorDAO();
+        periodoLetivoDAO = new PeriodoLetivoDAO();
+        atividadePeriodoDAO = new AtividadePeriodoDAO();
     }
 
     @Override
@@ -33,11 +41,29 @@ public class AtividadeServlet extends HttpServlet {
             throws ServletException, IOException {
 
         try {
-            List<Atividade> atividades = atividadeDAO.listar();
-            List<Coordenador> coordenadores = coordenadorDAO.listar();
+        	List<Atividade> atividades =
+        	        atividadeDAO.listar();
 
-            request.setAttribute("atividades", atividades);
-            request.setAttribute("coordenadores", coordenadores);
+        	List<Coordenador> coordenadores =
+        	        coordenadorDAO.listar();
+
+        	List<PeriodoLetivo> periodos =
+        	        periodoLetivoDAO.listar();
+
+        	request.setAttribute(
+        	        "atividades",
+        	        atividades
+        	);
+
+        	request.setAttribute(
+        	        "coordenadores",
+        	        coordenadores
+        	);
+
+        	request.setAttribute(
+        	        "periodos",
+        	        periodos
+        	);
 
             request.getRequestDispatcher("/WEB-INF/views/admin/atividades.jsp")
                    .forward(request, response);
@@ -99,6 +125,14 @@ public class AtividadeServlet extends HttpServlet {
                         Long.parseLong(
                             request.getParameter("coordenadorId")
                         );
+                
+                Long periodoId1 =
+                        Long.parseLong(
+                            request.getParameter("periodoId1")
+                        );
+
+                String periodoId2Param =
+                        request.getParameter("periodoId2");
                 
                 List<String> tiposPermitidos = List.of(
                         "projeto",
@@ -164,7 +198,6 @@ public class AtividadeServlet extends HttpServlet {
                     return;
                 }
 
-                // Cria o objeto Atividade
                 Atividade atividade = new Atividade();
 
                 atividade.setTitulo(titulo);
@@ -175,8 +208,29 @@ public class AtividadeServlet extends HttpServlet {
                 atividade.setStatus(status);
                 atividade.setCoordenadorId(coordenadorId);
 
-                // Salva no banco
-                atividadeDAO.inserir(atividade);
+                
+                Long atividadeId =
+                        atividadeDAO.inserir(atividade);
+                
+                atividadePeriodoDAO.inserir(
+                        atividadeId,
+                        periodoId1
+                );
+                
+                if (periodoId2Param != null
+                        && !periodoId2Param.isEmpty()) {
+
+                    Long periodoId2 =
+                            Long.parseLong(periodoId2Param);
+
+                    if (!periodoId1.equals(periodoId2)) {
+
+                        atividadePeriodoDAO.inserir(
+                                atividadeId,
+                                periodoId2
+                        );
+                    }
+                }
             }
 
             // Depois de cadastrar ou excluir,

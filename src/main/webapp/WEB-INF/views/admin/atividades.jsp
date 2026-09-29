@@ -262,6 +262,62 @@
 								</select>
 
 							</div>
+							
+							<div class="row g-3">
+
+						    <div class="col-md-6">
+						
+						        <label for="periodoId1" class="form-label">
+						            <fmt:message key="admin.atividades.periodoPrincipal" />
+						        </label>
+						
+						        <select
+						            class="form-select"
+						            id="periodoId1"
+						            name="periodoId1"
+						            required>
+						
+						            <option value="">
+						                <fmt:message key="admin.selecione" />
+						            </option>
+						
+						            <c:forEach var="periodo" items="${periodos}">
+						                <option value="${periodo.id}">
+						                    ${periodo.ano}/${periodo.semestre}
+						                </option>
+						            </c:forEach>
+						
+						        </select>
+						
+						    </div>
+						
+						
+						    <div class="col-md-6">
+						
+						        <label for="periodoId2" class="form-label">
+						            <fmt:message key="admin.atividades.periodoSecundario" />
+						        </label>
+						
+						        <select
+						            class="form-select"
+						            id="periodoId2"
+						            name="periodoId2">
+						
+						            <option value="">
+						                <fmt:message key="admin.atividades.semSegundoPeriodo" />
+						            </option>
+						
+						            <c:forEach var="periodo" items="${periodos}">
+						                <option value="${periodo.id}">
+						                    ${periodo.ano}/${periodo.semestre}
+						                </option>
+						            </c:forEach>
+						
+						        </select>
+						
+						    </div>
+						
+						</div>
 
 
 							<%-- BOTÃO --%>
@@ -335,6 +391,10 @@
 											<th><fmt:message key="admin.atividades.dataFim" /></th>
 
 											<th><fmt:message key="admin.atividades.situacao" /></th>
+											
+											<th>
+											    <fmt:message key="admin.atividades.periodos" />
+											</th>
 
 											<th class="text-end"><fmt:message key="admin.acoes" />
 											</th>
@@ -379,6 +439,39 @@
 
 												<td>
 												    <fmt:message key="atividade.status.${atividade.status}" />
+												</td>
+												
+												<td>
+
+												    <c:choose>
+												
+												        <c:when test="${empty atividade.periodos}">
+												
+												            <span class="text-secondary">
+												                <fmt:message key="admin.atividades.semPeriodos" />
+												            </span>
+												
+												        </c:when>
+												
+												        <c:otherwise>
+												
+												            <c:forEach
+												                var="periodo"
+												                items="${atividade.periodos}"
+												                varStatus="status">
+												
+												                ${periodo.ano}/${periodo.semestre}
+												
+												                <c:if test="${not status.last}">
+												                    ,
+												                </c:if>
+												
+												            </c:forEach>
+												
+												        </c:otherwise>
+												
+												    </c:choose>
+												
 												</td>
 
 												<td class="text-end">
