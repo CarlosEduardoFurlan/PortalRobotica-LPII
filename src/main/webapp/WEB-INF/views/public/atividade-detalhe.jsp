@@ -90,6 +90,8 @@
 
 		</section>
 
+		<section class="py-5"><div class="container"><div class="titulo-pagina"><h2><fmt:message key="conquistas.titulo" /></h2></div><c:choose><c:when test="${empty conquistas}"><div class="alert alert-light border"><fmt:message key="conquistas.vazio" /></div></c:when><c:otherwise><div class="row g-3"><c:forEach var="conquista" items="${conquistas}"><div class="col-md-6"><article class="card h-100"><div class="card-body"><h3 class="h5"><c:out value="${conquista.titulo}" /></h3><c:if test="${not empty conquista.data}"><p><fmt:formatDate value="${conquista.data}" pattern="dd/MM/yyyy" /></p></c:if><p class="text-secondary"><c:out value="${conquista.descricao}" /></p></div></article></div></c:forEach></div></c:otherwise></c:choose></div></section>
+
 
 
 		<%-- INFORMAÇÕES DA ATIVIDADE --%>

@@ -136,4 +136,9 @@ public class ParticipacaoDAO {
 
 		return false;
 	}
+
+	public void atualizar(Participacao participacao) throws SQLException {
+		String sql="UPDATE participacao SET funcao=?,descricao_contribuicao=? WHERE estudante_id=? AND atividade_id=?";
+		try(Connection c=Conexao.conectar();PreparedStatement ps=c.prepareStatement(sql)){ps.setString(1,participacao.getFuncao());ps.setString(2,participacao.getDescricaoContribuicao());ps.setLong(3,participacao.getEstudanteId());ps.setLong(4,participacao.getAtividadeId());if(ps.executeUpdate()!=1)throw new SQLException("Participação não encontrada.");}
+	}
 }

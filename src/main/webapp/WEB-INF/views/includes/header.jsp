@@ -161,6 +161,9 @@
 
                     </li>
 
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/alterar-senha"><fmt:message key="menu.alterarSenha" /></a></li>
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/login"><fmt:message key="menu.administracao" /></a></li>
+
 
                     <li class="nav-item">
 

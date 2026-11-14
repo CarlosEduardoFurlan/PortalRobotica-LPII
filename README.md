@@ -612,3 +612,69 @@ Funcionalidades como alteração de registros, autenticação e gerenciamento de
 **Carlos Eduardo Furlan**
 
 IFMS - Campus Campo Grande
+
+---
+
+## N2 — evolução do projeto
+
+A N2 preserva Java + JSP + Servlet + JDBC + DAO e acrescenta autenticação de coordenadores ativos, bcrypt, edição/inativação, edição transacional de atividades/períodos, conquistas, recuperação de senha, relatório e pool PostgreSQL via JNDI. O projeto continua em javax.servlet e Apache Tomcat 9.
+
+### Instalação no Eclipse
+
+1. Clone e use **File > Import > Existing Maven Projects**.
+2. Use **Maven > Update Project**.
+3. Crie o banco portal_robotica.
+4. Para instalação nova, execute sql/portal_robotica.sql. Para preservar a N1, execute sql/portal_robotica_n2_migracao.sql.
+5. Configure **Apache Tomcat 9** em **Servers**.
+6. Na configuração de execução do Tomcat, adicione em **Arguments > VM arguments**:
+
+    -Dportal.db.url=jdbc:postgresql://localhost:5432/portal_robotica
+    -Dportal.db.user=SEU_USUARIO
+    -Dportal.db.password=SUA_SENHA
+
+7. Em **Servers > Add and Remove...**, adicione portal-robotica.
+8. Inicie e acesse http://localhost:8080/portal-robotica/.
+
+O arquivo src/main/webapp/META-INF/context.xml declara o pool jdbc/PortalRoboticaDB com a fábrica do Tomcat. WEB-INF/web.xml declara o resource-ref e Conexao apenas obtém conexões do pool. Nenhuma senha PostgreSQL fica versionada e não é necessário editar a instalação global do Tomcat. Se o Eclipse publicar configuração antiga, use **Servers > Clean**, **Maven > Update Project** e publique novamente.
+
+### Primeiro coordenador
+
+Registros migrados não recebem credenciais inventadas. No Eclipse, execute SenhaUtil com **Run As > Java Application** e forneça uma senha de pelo menos 8 caracteres em **Run Configurations > Arguments > Program arguments**. Copie o hash bcrypt e execute, ajustando ID/e-mail:
+
+    UPDATE coordenador
+    SET email = 'coordenador@exemplo.edu.br',
+        senha_hash = '$2a$12$HASH_GERADO',
+        ativo = TRUE
+    WHERE id = 1;
+
+Depois acesse /login. Não versione senha nem hash de credencial real.
+
+### E-mail de teste
+
+Use um SMTP acadêmico/de teste, como Mailtrap Email Testing. Copie src/main/resources/email.properties.example para email.properties e preencha localmente; o arquivo real é ignorado pelo Git. Alternativamente use as variáveis MAIL_HOST, MAIL_PORT, MAIL_USERNAME, MAIL_PASSWORD, MAIL_FROM, MAIL_STARTTLS e APP_BASE_URL.
+
+O fluxo /esqueci-senha sempre responde genericamente. O banco armazena somente SHA-256 do token, que expira em 30 minutos e é de uso único. A troca da senha e a marcação do token como usado compartilham uma transação.
+
+### Segurança e regras N2
+
+- Senhas usam bcrypt com custo 12 e nunca aparecem em JSP ou sessão.
+- A sessão guarda apenas ID e nome; seu ID é renovado após login.
+- O filtro da administração revalida o coordenador ativo em cada acesso.
+- Estudantes e coordenadores são inativados, preservando histórico.
+- E-mails usam trim/lower e índices únicos.
+- Consultas usam PreparedStatement e páginas sensíveis usam no-store.
+- Atividade e períodos são alterados com a mesma Connection e commit/rollback.
+- Uploads aceitam JPEG, PNG ou WebP até 5 MB e ficam fora do projeto.
+
+Para demonstrar rollback com segurança, em ambiente de teste abra uma edição de atividade e troque no inspetor do navegador um valor de periodoId por um ID inexistente. A FK falhará e a transação manterá os dados e períodos anteriores.
+
+### Rotas N2
+
+- /login e /logout
+- /alterar-senha
+- /esqueci-senha
+- /redefinir-senha?token=...
+- /admin/conquistas
+- /admin/relatorio-periodo
+
+O plano/auditoria está em Docs/PLANO-N2.md e o roteiro de validação em Docs/CHECKLIST-TESTES-N2.md.

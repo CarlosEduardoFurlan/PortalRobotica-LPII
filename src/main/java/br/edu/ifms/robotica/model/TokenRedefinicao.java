@@ -1,0 +1,2 @@
+package br.edu.ifms.robotica.model;
+public class TokenRedefinicao{private Long id;private Long estudanteId;private Long coordenadorId;public Long getId(){return id;}public void setId(Long id){this.id=id;}public Long getEstudanteId(){return estudanteId;}public void setEstudanteId(Long id){estudanteId=id;}public Long getCoordenadorId(){return coordenadorId;}public void setCoordenadorId(Long id){coordenadorId=id;}public String getTipo(){return estudanteId!=null?"estudante":"coordenador";}}

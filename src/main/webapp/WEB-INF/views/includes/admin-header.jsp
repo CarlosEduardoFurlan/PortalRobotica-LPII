@@ -103,6 +103,9 @@
                         </a>
                     </li>
 
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/conquistas"><fmt:message key="admin.header.conquistas" /></a></li>
+                    <li class="nav-item"><a class="nav-link" href="${pageContext.request.contextPath}/admin/relatorio-periodo"><fmt:message key="admin.header.relatorio" /></a></li>
+
 
                     <li class="nav-item">
                         <a
@@ -159,6 +162,8 @@
                         <fmt:message key="admin.header.verPortal" />
 
                     </a>
+
+                    <form method="post" action="${pageContext.request.contextPath}/logout" class="d-inline"><button class="btn btn-link nav-link d-inline"><fmt:message key="login.logout" /></button></form>
 
                 </div>
 

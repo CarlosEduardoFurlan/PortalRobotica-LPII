@@ -1,0 +1,5 @@
+/target/
+/src/main/resources/email.properties
+/.idea/
+*.iml
+/.vscode/

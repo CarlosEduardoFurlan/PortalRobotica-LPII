@@ -13,6 +13,9 @@ public class Atividade {
 	private Date dataFim;
 	private String status;
 	private Long coordenadorId;
+	private String nomeCoordenador;
+	private List<Participacao> participacoes = new ArrayList<>();
+	private List<Conquista> conquistas = new ArrayList<>();
 	private List<PeriodoLetivo> periodos = new ArrayList<>();
 	
 	// Construtor vazio
@@ -104,5 +107,12 @@ public class Atividade {
 	public void setPeriodos(List<PeriodoLetivo> periodos) {
 	    this.periodos = periodos;
 	}
+
+	public String getNomeCoordenador() { return nomeCoordenador; }
+	public void setNomeCoordenador(String nomeCoordenador) { this.nomeCoordenador = nomeCoordenador; }
+	public List<Participacao> getParticipacoes() { return participacoes; }
+	public void setParticipacoes(List<Participacao> participacoes) { this.participacoes = participacoes; }
+	public List<Conquista> getConquistas() { return conquistas; }
+	public void setConquistas(List<Conquista> conquistas) { this.conquistas = conquistas; }
 	
 }

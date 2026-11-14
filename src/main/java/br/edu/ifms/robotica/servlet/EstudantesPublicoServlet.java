@@ -29,7 +29,7 @@ public class EstudantesPublicoServlet extends HttpServlet {
 
 		try {
 
-			List<Estudante> estudantes = estudanteDAO.listar();
+			List<Estudante> estudantes = estudanteDAO.listarAtivos();
 
 			for (Estudante estudante : estudantes) {
 

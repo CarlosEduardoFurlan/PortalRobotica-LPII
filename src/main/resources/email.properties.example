@@ -1,0 +1,8 @@
+# Copie para email.properties (arquivo ignorado pelo Git) OU use variáveis de ambiente.
+mail.host=sandbox.smtp.mailtrap.io
+mail.port=587
+mail.username=
+mail.password=
+mail.from=nao-responda@portal-robotica.local
+mail.starttls=true
+app.baseUrl=http://localhost:8080/portal-robotica

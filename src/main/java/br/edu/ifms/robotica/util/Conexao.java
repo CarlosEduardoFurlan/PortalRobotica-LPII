@@ -1,25 +1,23 @@
 package br.edu.ifms.robotica.util;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.SQLException;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 
 public class Conexao {
 
-    private static final String URL = "jdbc:postgresql://localhost:5432/portal_robotica";
-    private static final String USUARIO = "postgres";
-    private static final String SENHA = "postgres";
+    private static final String JNDI_NAME = "java:comp/env/jdbc/PortalRoboticaDB";
 
     public static Connection conectar() throws SQLException {
 
         try {
-            Class.forName("org.postgresql.Driver");
-
-            return DriverManager.getConnection(URL, USUARIO, SENHA);
-
-        } catch (ClassNotFoundException e) {
-
-            throw new SQLException("Driver PostgreSQL não encontrado.", e);
+            DataSource dataSource = (DataSource) new InitialContext().lookup(JNDI_NAME);
+            return dataSource.getConnection();
+        } catch (NamingException e) {
+            throw new SQLException("DataSource JNDI não encontrado: " + JNDI_NAME, e);
         }
     }
 }

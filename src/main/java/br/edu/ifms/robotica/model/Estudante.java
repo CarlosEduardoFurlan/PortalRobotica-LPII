@@ -9,6 +9,9 @@ public class Estudante {
     private String nome;
     private String minibio;
     private String foto;
+    private String email;
+    private String senhaHash;
+    private boolean ativo;
     private List<String> atividades = new ArrayList<>();
     
     // Construtor vazio
@@ -70,4 +73,11 @@ public class Estudante {
 	public void setAtividades(List<String> atividades) {
 	    this.atividades = atividades;
 	}
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+    public String getSenhaHash() { return senhaHash; }
+    public void setSenhaHash(String senhaHash) { this.senhaHash = senhaHash; }
+    public boolean isAtivo() { return ativo; }
+    public void setAtivo(boolean ativo) { this.ativo = ativo; }
 }

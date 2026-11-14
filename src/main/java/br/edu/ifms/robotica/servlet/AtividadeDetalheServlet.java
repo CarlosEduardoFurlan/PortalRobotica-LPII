@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.edu.ifms.robotica.dao.AtividadeDAO;
 import br.edu.ifms.robotica.dao.ParticipacaoDAO;
+import br.edu.ifms.robotica.dao.ConquistaDAO;
 import br.edu.ifms.robotica.model.Atividade;
 import br.edu.ifms.robotica.model.Participacao;
 import br.edu.ifms.robotica.model.PeriodoLetivo;
@@ -21,11 +22,13 @@ public class AtividadeDetalheServlet extends HttpServlet {
 
     private AtividadeDAO atividadeDAO;
     private ParticipacaoDAO participacaoDAO;
+    private ConquistaDAO conquistaDAO;
 
     @Override
     public void init() {
         atividadeDAO = new AtividadeDAO();
         participacaoDAO = new ParticipacaoDAO();
+        conquistaDAO = new ConquistaDAO();
     }
 
     @Override
@@ -41,6 +44,11 @@ public class AtividadeDetalheServlet extends HttpServlet {
 
             Atividade atividade =
                 atividadeDAO.buscarPorId(id);
+
+            if (atividade == null) {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                return;
+            }
             
             List<PeriodoLetivo> periodos =
                     atividadeDAO.listarPeriodosPorAtividade(
@@ -61,11 +69,14 @@ public class AtividadeDetalheServlet extends HttpServlet {
                     "participacoes",
                     participacoes
             );
+            request.setAttribute("conquistas", conquistaDAO.listarPorAtividade(id));
 
             request.getRequestDispatcher(
             		"/WEB-INF/views/public/atividade-detalhe.jsp"
             ).forward(request, response);
 
+        } catch (NumberFormatException e) {
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         } catch (SQLException e) {
 
             throw new ServletException(

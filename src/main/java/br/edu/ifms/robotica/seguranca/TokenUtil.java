@@ -1,0 +1,3 @@
+package br.edu.ifms.robotica.seguranca;
+import java.nio.charset.StandardCharsets;import java.security.*;import java.util.Base64;
+public final class TokenUtil{private static final SecureRandom RANDOM=new SecureRandom();private TokenUtil(){}public static String gerar(){byte[]b=new byte[32];RANDOM.nextBytes(b);return Base64.getUrlEncoder().withoutPadding().encodeToString(b);}public static String hash(String token){try{byte[]h=MessageDigest.getInstance("SHA-256").digest(token.getBytes(StandardCharsets.UTF_8));return java.util.HexFormat.of().formatHex(h);}catch(NoSuchAlgorithmException e){throw new IllegalStateException(e);}}}

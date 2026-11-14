@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context>
+    <!--
+      Defina no Tomcat do Eclipse (Open launch configuration > Arguments > VM arguments):
+      -Dportal.db.url=jdbc:postgresql://localhost:5432/portal_robotica
+      -Dportal.db.user=SEU_USUARIO
+      -Dportal.db.password=SUA_SENHA
+    -->
+    <Resource name="jdbc/PortalRoboticaDB"
+              auth="Container"
+              type="javax.sql.DataSource"
+              factory="org.apache.tomcat.jdbc.pool.DataSourceFactory"
+              driverClassName="org.postgresql.Driver"
+              url="${portal.db.url}"
+              username="${portal.db.user}"
+              password="${portal.db.password}"
+              maxActive="20"
+              maxIdle="10"
+              minIdle="2"
+              maxWait="10000"
+              testOnBorrow="true"
+              validationQuery="SELECT 1" />
+</Context>
